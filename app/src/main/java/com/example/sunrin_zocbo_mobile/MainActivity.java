@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             case 3: transaction.replace(R.id.container, detailFragment); break;
             case 4: transaction.replace(R.id.container, subjectFragment); break;
         }
-        transaction.addToBackStack(null);
+        if (index > 1) transaction.addToBackStack(null);
         transaction.commit();
     }
 }
