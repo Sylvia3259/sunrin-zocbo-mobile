@@ -2,6 +2,7 @@ package com.example.sunrin_zocbo_mobile;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ public class GradeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private CardView[] cardViews;
 
     public GradeFragment() {
         // Required empty public constructor
@@ -59,6 +62,29 @@ public class GradeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_grade, container, false);
+        View view = inflater.inflate(R.layout.fragment_grade, container, false);
+
+        cardViews = new CardView[]{
+                view.findViewById(R.id.grade1),
+                view.findViewById(R.id.grade2),
+                view.findViewById(R.id.grade3),
+        };
+
+        CardView.OnClickListener onClickListener = new CardView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)getActivity();
+                if (mainActivity == null) return;
+                for (int i = 0; i < cardViews.length; i++)
+                    if (view.getId() == cardViews[i].getId())
+                        mainActivity.grade = i;
+                mainActivity.changeFragment(3);
+            }
+        };
+
+        for(CardView cardView : cardViews)
+            cardView.setOnClickListener(onClickListener);
+
+        return view;
     }
 }

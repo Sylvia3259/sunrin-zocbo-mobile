@@ -77,7 +77,7 @@ public class MajorFragment extends Fragment {
             public void onClick(View view) {
                 MainActivity mainActivity = (MainActivity)getActivity();
                 if (mainActivity == null) return;
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < cardViews.length; i++)
                     if (view.getId() == cardViews[i].getId())
                         mainActivity.major = i;
                 mainActivity.changeFragment(2);
