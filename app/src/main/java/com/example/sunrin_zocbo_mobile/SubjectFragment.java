@@ -7,16 +7,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,7 +74,7 @@ public class SubjectFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
 
-        MainActivity mainActivity = (MainActivity)getActivity();
+        final MainActivity mainActivity = (MainActivity)getActivity();
         if (mainActivity == null) return null;
 
         RecyclerView recyclerView = view.findViewById(R.id.subjectList);
@@ -79,13 +82,44 @@ public class SubjectFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerAdapter adapter = new RecyclerAdapter();
+        final RecyclerAdapter adapter = new RecyclerAdapter();
 
-        for (Item item : mainActivity.items) {
-            adapter.addItem(new ItemCard(item.getSubject()));
-        }
+        for (Item item : mainActivity.items)
+            adapter.addItem(new ItemCard(item));
 
         recyclerView.setAdapter(adapter);
+
+        view.findViewById(R.id.downloadButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int count = adapter.getItemCount();
+                for (int i = 0; i < count; i++) {
+                    ItemCard itemCard = adapter.getItem(i);
+                    if (itemCard.IsChecked()) {
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference storageReference = storage.getReference().child("pdfs/" + itemCard.getFilename());
+
+                        File rootPath = new File(Environment.getExternalStorageDirectory(), "Documents");
+                        if(!rootPath.exists())
+                            rootPath.mkdirs();
+
+                        File localFile = new File(rootPath, itemCard.getFilename());
+
+                        storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(mainActivity, "다운로드 성공", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                Toast.makeText(mainActivity, "다운로드 실패", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
+            }
+        });
 
         return view;
     }

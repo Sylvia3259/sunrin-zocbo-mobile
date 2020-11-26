@@ -3,6 +3,8 @@ package com.example.sunrin_zocbo_mobile;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,14 +35,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        CheckBox checkBox;
         TextView cardText;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            checkBox = itemView.findViewById(R.id.checkBox);
             cardText = itemView.findViewById(R.id.cardText);
         }
 
-        public void setItem(ItemCard item){
+        public void setItem(final ItemCard item){
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    item.setChecked(b);
+                }
+            });
             cardText.setText(item.GetText());
         }
     }

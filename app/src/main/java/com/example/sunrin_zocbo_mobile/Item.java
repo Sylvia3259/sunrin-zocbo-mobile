@@ -8,7 +8,7 @@ public class Item {
 
     public Item(Map<String, Object> data) {
         this.subject = data.get("subject").toString();
-        this.filename = data.get("path").toString() + data.get("filename").toString();;
+        this.filename = data.get("filename").toString();;
     }
 
     public String getSubject() {
