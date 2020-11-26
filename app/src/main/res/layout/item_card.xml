@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/check_box"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="5dp"
+            android:button="@null"
+            android:background="@drawable/custom_checkbox" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/nanumsquareb"
+            android:text="CardText"
+            android:textSize="26sp"
+            android:id="@+id/cardText" />
+
+    </LinearLayout>
 
 </RelativeLayout>
