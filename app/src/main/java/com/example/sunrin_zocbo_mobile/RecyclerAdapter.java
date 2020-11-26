@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
-    ArrayList<ItemCard> items = new ArrayList<>();
+    private ArrayList<ItemCard> items = new ArrayList<>();
 
     @NonNull
     @Override

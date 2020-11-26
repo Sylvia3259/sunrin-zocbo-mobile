@@ -2,12 +2,21 @@ package com.example.sunrin_zocbo_mobile;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -108,9 +117,40 @@ public class DetailFragment extends Fragment {
         view.findViewById(R.id.searchButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity mainActivity = (MainActivity)getActivity();
+                final MainActivity mainActivity = (MainActivity)getActivity();
                 if (mainActivity == null) return;
-                mainActivity.changeFragment(3);
+
+                String[] majorText = new String[] { "정보보호과", "소프트웨어과", "아이티경영과", "콘텐츠디자인과" };
+                String[] yearText = new String[] { "2018년", "2019년", "2020년" };
+                String[] gradeText = new String[] { "1학년", "2학년", "3학년" };
+                String[] termText = new String[] { "1학기", "2학기" };
+                String[] examText = new String[] { "중간고사", "기말고사" };
+
+                String[] data = new String[] {
+                        majorText[mainActivity.major],
+                        yearText[mainActivity.year],
+                        gradeText[mainActivity.grade],
+                        termText[mainActivity.term],
+                        examText[mainActivity.exam]
+                };
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("exams")
+                        .whereEqualTo("major", data[0])
+                        .whereEqualTo("year", data[1])
+                        .whereEqualTo("grade", data[2])
+                        .whereEqualTo("term", data[3])
+                        .whereEqualTo("exam", data[4])
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful())
+                                    for (QueryDocumentSnapshot document : task.getResult())
+                                        mainActivity.items.add(new Item(document.getData()));
+                                mainActivity.changeFragment(3);
+                            }
+                        });
             }
         });
 

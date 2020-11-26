@@ -2,13 +2,21 @@ package com.example.sunrin_zocbo_mobile;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +71,9 @@ public class SubjectFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
 
+        MainActivity mainActivity = (MainActivity)getActivity();
+        if (mainActivity == null) return null;
+
         RecyclerView recyclerView = view.findViewById(R.id.subjectList);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -70,9 +81,9 @@ public class SubjectFragment extends Fragment {
 
         RecyclerAdapter adapter = new RecyclerAdapter();
 
-        adapter.addItem(new ItemCard("국어"));
-        adapter.addItem(new ItemCard("영어"));
-        adapter.addItem(new ItemCard("수학"));
+        for (Item item : mainActivity.items) {
+            adapter.addItem(new ItemCard(item.getSubject()));
+        }
 
         recyclerView.setAdapter(adapter);
 

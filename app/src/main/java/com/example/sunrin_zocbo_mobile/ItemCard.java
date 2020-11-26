@@ -1,8 +1,8 @@
 package com.example.sunrin_zocbo_mobile;
 
 public class ItemCard {
-    boolean checked;
-    String text;
+    private boolean checked;
+    private String text;
 
     public ItemCard(String text) {
         this.checked = false;
