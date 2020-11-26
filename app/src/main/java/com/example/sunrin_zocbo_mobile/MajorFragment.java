@@ -80,7 +80,7 @@ public class MajorFragment extends Fragment {
                 for (int i = 0; i < cardViews.length; i++)
                     if (view.getId() == cardViews[i].getId())
                         mainActivity.major = i;
-                mainActivity.changeFragment(2);
+                mainActivity.changeFragment(1);
             }
         };
 

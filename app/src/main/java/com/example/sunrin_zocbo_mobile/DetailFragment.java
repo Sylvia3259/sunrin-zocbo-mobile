@@ -63,20 +63,56 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
 
         NumberPicker yearPicker = view.findViewById(R.id.yearPicker);
-        NumberPicker semesterPicker = view.findViewById(R.id.semesterPicker);
+        NumberPicker termPicker = view.findViewById(R.id.termPicker);
         NumberPicker examPicker = view.findViewById(R.id.examPicker);
 
-        yearPicker.setMinValue(2018);
-        yearPicker.setMaxValue(2020);
+        yearPicker.setMinValue(0);
+        yearPicker.setMaxValue(2);
         yearPicker.setDisplayedValues( new String[] { "2018년", "2019년", "2020년" } );
 
-        semesterPicker.setMinValue(1);
-        semesterPicker.setMaxValue(2);
-        semesterPicker.setDisplayedValues( new String[] { "1학기", "2학기" } );
+        termPicker.setMinValue(0);
+        termPicker.setMaxValue(1);
+        termPicker.setDisplayedValues( new String[] { "1학기", "2학기" } );
 
-        examPicker.setMinValue(1);
-        examPicker.setMaxValue(2);
+        examPicker.setMinValue(0);
+        examPicker.setMaxValue(1);
         examPicker.setDisplayedValues( new String[] { "중간고사", "기말고사" } );
+
+        yearPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                MainActivity mainActivity = (MainActivity)getActivity();
+                if (mainActivity == null) return;
+                mainActivity.year = i1;
+            }
+        });
+
+        termPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                MainActivity mainActivity = (MainActivity)getActivity();
+                if (mainActivity == null) return;
+                mainActivity.term = i1;
+            }
+        });
+
+        examPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                MainActivity mainActivity = (MainActivity)getActivity();
+                if (mainActivity == null) return;
+                mainActivity.exam = i1;
+            }
+        });
+
+        view.findViewById(R.id.searchButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)getActivity();
+                if (mainActivity == null) return;
+                mainActivity.changeFragment(3);
+            }
+        });
 
         return view;
     }

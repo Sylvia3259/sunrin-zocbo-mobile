@@ -19,7 +19,8 @@
             android:fontFamily="@font/nanumsquareeb"
             android:textColor="#ffffff"
             android:textSize="26sp"
-            android:text="본인의 학년을 선택해주세요"/>
+            android:text="본인의 학년을 선택해주세요"
+            android:gravity="center"/>
     </RelativeLayout>
 
     <LinearLayout

@@ -6,8 +6,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
-    public int major;
-    public int grade;
+    public int major = 0;
+    public int year = 0;
+    public int grade = 0;
+    public int term = 0;
+    public int exam = 0;
 
     MajorFragment majorFragment;
     GradeFragment gradeFragment;
@@ -24,18 +27,18 @@ public class MainActivity extends AppCompatActivity {
         detailFragment = new DetailFragment();
         subjectFragment = new SubjectFragment();
 
-        changeFragment(1);
+        changeFragment(0);
     }
 
     public void changeFragment(int index) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         switch (index) {
-            case 1: transaction.replace(R.id.container, majorFragment); break;
-            case 2: transaction.replace(R.id.container, gradeFragment); break;
-            case 3: transaction.replace(R.id.container, detailFragment); break;
-            case 4: transaction.replace(R.id.container, subjectFragment); break;
+            case 0: transaction.replace(R.id.container, majorFragment); break;
+            case 1: transaction.replace(R.id.container, gradeFragment); break;
+            case 2: transaction.replace(R.id.container, detailFragment); break;
+            case 3: transaction.replace(R.id.container, subjectFragment); break;
         }
-        if (index > 1) transaction.addToBackStack(null);
+        if (index > 0) transaction.addToBackStack(null);
         transaction.commit();
     }
 }

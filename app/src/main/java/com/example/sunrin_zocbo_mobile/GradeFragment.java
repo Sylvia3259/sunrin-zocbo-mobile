@@ -78,7 +78,7 @@ public class GradeFragment extends Fragment {
                 for (int i = 0; i < cardViews.length; i++)
                     if (view.getId() == cardViews[i].getId())
                         mainActivity.grade = i;
-                mainActivity.changeFragment(3);
+                mainActivity.changeFragment(2);
             }
         };
 

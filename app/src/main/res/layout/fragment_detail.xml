@@ -19,7 +19,8 @@
             android:fontFamily="@font/nanumsquareeb"
             android:textColor="#ffffff"
             android:textSize="26sp"
-            android:text="본인의 학년을 선택해주세요"/>
+            android:text="필요한 시험지의 세부 정보를\n선택해주세요"
+            android:gravity="center"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -44,7 +45,7 @@
                 android:theme="@style/NumberPickerTheme"/>
 
             <NumberPicker
-                android:id="@+id/semesterPicker"
+                android:id="@+id/termPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
