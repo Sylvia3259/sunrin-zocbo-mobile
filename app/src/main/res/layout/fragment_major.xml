@@ -47,7 +47,7 @@
                 android:layout_gravity="center"
                 android:text="정보보호과"
                 android:fontFamily="@font/nanumsquareb"
-                android:textSize="22dp"/>
+                android:textSize="22sp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -69,7 +69,7 @@
                 android:layout_gravity="center"
                 android:text="소프트웨어과"
                 android:fontFamily="@font/nanumsquareb"
-                android:textSize="22dp"/>
+                android:textSize="22sp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -91,7 +91,7 @@
                 android:layout_gravity="center"
                 android:text="아이티경영과"
                 android:fontFamily="@font/nanumsquareb"
-                android:textSize="22dp"/>
+                android:textSize="22sp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -113,7 +113,7 @@
                 android:layout_gravity="center"
                 android:text="콘텐츠디자인과"
                 android:fontFamily="@font/nanumsquareb"
-                android:textSize="22dp"/>
+                android:textSize="22sp"/>
 
         </androidx.cardview.widget.CardView>
 

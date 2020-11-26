@@ -47,7 +47,7 @@
                 android:layout_gravity="center"
                 android:text="1학년"
                 android:fontFamily="@font/nanumsquareb"
-                android:textSize="22dp"/>
+                android:textSize="22sp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -69,7 +69,7 @@
                 android:layout_gravity="center"
                 android:text="2학년"
                 android:fontFamily="@font/nanumsquareb"
-                android:textSize="22dp"/>
+                android:textSize="22sp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -91,7 +91,7 @@
                 android:layout_gravity="center"
                 android:text="3학년"
                 android:fontFamily="@font/nanumsquareb"
-                android:textSize="22dp"/>
+                android:textSize="22sp"/>
 
         </androidx.cardview.widget.CardView>
 
