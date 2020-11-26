@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +60,24 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
+
+        NumberPicker yearPicker = view.findViewById(R.id.yearPicker);
+        NumberPicker semesterPicker = view.findViewById(R.id.semesterPicker);
+        NumberPicker examPicker = view.findViewById(R.id.examPicker);
+
+        yearPicker.setMinValue(2018);
+        yearPicker.setMaxValue(2020);
+        yearPicker.setDisplayedValues( new String[] { "2018년", "2019년", "2020년" } );
+
+        semesterPicker.setMinValue(1);
+        semesterPicker.setMaxValue(2);
+        semesterPicker.setDisplayedValues( new String[] { "1학기", "2학기" } );
+
+        examPicker.setMinValue(1);
+        examPicker.setMaxValue(2);
+        examPicker.setDisplayedValues( new String[] { "중간고사", "기말고사" } );
+
+        return view;
     }
 }
