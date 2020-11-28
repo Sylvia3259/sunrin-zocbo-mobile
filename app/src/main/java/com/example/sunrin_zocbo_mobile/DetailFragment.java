@@ -16,7 +16,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,21 +74,30 @@ public class DetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
 
+        String currentYearString = new SimpleDateFormat("yyyy", Locale.getDefault()).format(Calendar.getInstance().getTime());
+        int currentYear = Integer.parseInt(currentYearString);
+
+        final String[] majorText = new String[] { "정보보호과", "소프트웨어과", "아이티경영과", "콘텐츠디자인과" };
+        final String[] yearText = new String[] { (currentYear - 2) + "년", (currentYear - 1) + "년", (currentYear - 0) + "년" };
+        final String[] gradeText = new String[] { "1학년", "2학년", "3학년" };
+        final String[] termText = new String[] { "1학기", "2학기" };
+        final String[] examText = new String[] { "중간고사", "기말고사" };
+
         NumberPicker yearPicker = view.findViewById(R.id.yearPicker);
         NumberPicker termPicker = view.findViewById(R.id.termPicker);
         NumberPicker examPicker = view.findViewById(R.id.examPicker);
 
         yearPicker.setMinValue(0);
         yearPicker.setMaxValue(2);
-        yearPicker.setDisplayedValues( new String[] { "2018년", "2019년", "2020년" } );
+        yearPicker.setDisplayedValues(yearText);
 
         termPicker.setMinValue(0);
         termPicker.setMaxValue(1);
-        termPicker.setDisplayedValues( new String[] { "1학기", "2학기" } );
+        termPicker.setDisplayedValues(termText);
 
         examPicker.setMinValue(0);
         examPicker.setMaxValue(1);
-        examPicker.setDisplayedValues( new String[] { "중간고사", "기말고사" } );
+        examPicker.setDisplayedValues(examText);
 
         yearPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
@@ -119,12 +131,6 @@ public class DetailFragment extends Fragment {
             public void onClick(View view) {
                 final MainActivity mainActivity = (MainActivity)getActivity();
                 if (mainActivity == null) return;
-
-                String[] majorText = new String[] { "정보보호과", "소프트웨어과", "아이티경영과", "콘텐츠디자인과" };
-                String[] yearText = new String[] { "2018년", "2019년", "2020년" };
-                String[] gradeText = new String[] { "1학년", "2학년", "3학년" };
-                String[] termText = new String[] { "1학기", "2학기" };
-                String[] examText = new String[] { "중간고사", "기말고사" };
 
                 String[] data = new String[] {
                         majorText[mainActivity.major],
